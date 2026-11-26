@@ -6,10 +6,10 @@ class LeitnerScheduler:
 
     def apply_answer(self, card: Card, correct: bool, today: date) -> None: 
         if correct:
-            card.promote(card)
+            card.promote()
         else:
-            card.demote(card)
-        card.next_review = card.next_review_date(card.box, today)
+            card.demote()
+        card.next_review = self.next_review_date(card.box, today)
 
     def next_review_date(self, box: int, today: date) -> date: 
         return today + timedelta(days= self.INTERVALS[box])

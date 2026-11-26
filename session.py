@@ -1,6 +1,6 @@
 from datetime import date
 from card import Card
-from scheduler import LeitnerScheduler
+from interval import LeitnerScheduler
 from repository import CardRepository
 
 class ReviewSession:

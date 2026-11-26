@@ -1,9 +1,27 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-from werkzeug.utils import secure_filename
-import os
+from datetime import date
+from flask import Flask, render_template, request, redirect, url_for
+
+from repository import CardRepository
+from interval import LeitnerScheduler
+from session import ReviewSession
 
 app = Flask(__name__)
+repo = CardRepository("test.db")
+scheduler = LeitnerScheduler()
 
-@app.route("/")                              # accueil : nb de cartes à réviser
-@app.route("/review", methods=["GET", "POST"])   # afficher carte / recevoir réponse
-@app.route("/import", methods=["GET", "POST"])   # upload Excel
+
+def new_session() -> ReviewSession:
+    
+    
+    # crée une ReviewSession avec repo, scheduler, date.today()
+
+
+@app.route("/")
+def index(): ...
+
+@app.route("/review", methods=["GET", "POST"])
+def review(): ...
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
