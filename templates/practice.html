@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+{% if card %}
+  <p class="muted" style="text-align:center">Entraînement : carte {{ i + 1 }} / {{ total }} (les boîtes ne changent pas)</p>
+  <div class="card">{{ card.recto }}</div>
+
+  {% if reveal %}
+    <div class="card verso">{{ card.verso }}</div>
+    <a class="btn" href="{{ url_for('practice', seed=seed, i=i + 1) }}">Carte suivante</a>
+  {% else %}
+    <a class="btn" href="{{ url_for('practice', seed=seed, i=i, reveal=1) }}">Voir la réponse</a>
+  {% endif %}
+  <a class="btn" href="{{ url_for('index') }}">Arrêter</a>
+{% else %}
+  <h1>Entraînement terminé</h1>
+  {% if total > 0 %}
+    <p>Tu as revu les {{ total }} carte(s). Tes boîtes n'ont pas changé.</p>
+    <a class="btn" href="{{ url_for('practice') }}">Recommencer</a>
+  {% else %}
+    <p>Aucune carte en base.</p>
+  {% endif %}
+  <a class="btn" href="{{ url_for('index') }}">Accueil</a>
+{% endif %}
+{% endblock %}

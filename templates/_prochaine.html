@@ -1,0 +1,9 @@
+{% if prochaine %}
+  <p>
+    Prochaine révision :
+    {% if prochaine.jours == 1 %}demain{% else %}le {{ prochaine.date.strftime('%d/%m/%Y') }} (dans {{ prochaine.jours }} jours){% endif %}
+    ({{ prochaine.nb }} carte(s)).
+  </p>
+{% else %}
+  <p>Aucune carte en base. Importe un fichier Excel avec <code>python importer.py</code>.</p>
+{% endif %}

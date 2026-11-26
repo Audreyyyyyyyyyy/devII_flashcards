@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">{{ card.recto }}</div>
+
+{% if reveal %}
+  <div class="card verso">{{ card.verso }}</div>
+  <form method="post" action="{{ url_for('review_card', card_id=card.id) }}">
+    <button name="correct" value="1">Je savais</button>
+    <button name="correct" value="0">Je ne savais pas</button>
+  </form>
+{% else %}
+  <a class="btn" href="{{ url_for('review_card', card_id=card.id, reveal=1) }}">Voir la réponse</a>
+{% endif %}
+{% endblock %}
