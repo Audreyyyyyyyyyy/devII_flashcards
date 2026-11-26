@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Flashcards</h1>
+{% if nb > 0 %}
+  <p>{{ nb }} carte(s) à réviser aujourd'hui.</p>
+  <a class="btn" href="{{ url_for('review') }}">Commencer</a>
+{% else %}
+  <p>Aucune carte à réviser aujourd'hui.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Mes boîtes</h1>
+
+{% for box in boxes %}
+  <h2>Boîte {{ box.num }} ({{ box.cards|length }} carte(s))</h2>
+  <p class="muted">
+    {% if box.interval == 0 %}Révision le jour même{% else %}Révision tous les {{ box.interval }} jour(s){% endif %}
+  </p>
+
+  {% if box.cards %}
+  <table>
+    <tr><th>Recto</th><th>Verso</th><th>Prochaine révision</th></tr>
+    {% for c in box.cards %}
+    <tr>
+      <td>{{ c.recto }}</td>
+      <td>{{ c.verso }}</td>
+      <td>
+        {% if c.next_review <= today %}
+          <span class="due">À réviser aujourd'hui</span>
+        {% else %}
+          {{ c.next_review.strftime('%d/%m/%Y') }} (dans {{ (c.next_review - today).days }} j)
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+    <p class="muted">Aucune carte.</p>
+  {% endif %}
+{% endfor %}
+{% endblock %}
